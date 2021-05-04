@@ -39,17 +39,32 @@ class InputViewController: UIViewController {
     
     //inputViewControllerを消すタイミングで呼び出される処理->入力内容をRealmデータベースに書き込む
     override func viewWillDisappear(_ animated: Bool) {
-        //realmデータベースに入力されたデータを書き込む
-        try! realm.write {
-            self.task.title = self.titleTextField.text!
-            self.task.category = self.categoryTextField.text!
-            self.task.contents = self.contentsTextView.text
-            self.task.date = self.datePicker.date
-            self.realm.add(self.task, update: .modified)
+        //titleが入力されていれば
+        if self.titleTextField.text! != "" {
+            //realmデータベースに入力されたデータを書き込む
+            try! realm.write {
+                self.task.title = self.titleTextField.text!
+                self.task.category = self.categoryTextField.text!
+                self.task.contents = self.contentsTextView.text
+                self.task.date = self.datePicker.date
+                self.realm.add(self.task, update: .modified)
+            }
+            
+            //通知を設定
+            setNotification(task: task)
         }
         
-        //通知を設定
-        setNotification(task: task)
+//        //realmデータベースに入力されたデータを書き込む
+//        try! realm.write {
+//            self.task.title = self.titleTextField.text!
+//            self.task.category = self.categoryTextField.text!
+//            self.task.contents = self.contentsTextView.text
+//            self.task.date = self.datePicker.date
+//            self.realm.add(self.task, update: .modified)
+//        }
+//
+//        //通知を設定
+//        setNotification(task: task)
         //viewWillDisappear
         super.viewWillDisappear(animated)
     }

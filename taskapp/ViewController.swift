@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //Realmインスタンスの取得
     let realm = try! Realm()
     
-    //検索フィールドの入力文字列を格納する変数
+    //検索フィールドの入力文字列を格納する変数//
     var query:String = ""
 
     //DB内のタスクが管理されているリスト
@@ -176,6 +176,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             //inputViewControllerに送るtaskのプロパティを、新規taskインスタンス（=id以外の要素は空）で設定
             inputViewController.task = task
+            //print(inputViewController.task)
         }
     }
 }
